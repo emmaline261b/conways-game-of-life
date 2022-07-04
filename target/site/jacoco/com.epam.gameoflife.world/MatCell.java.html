@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MatCell.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">conwaysgameoflife</a> &gt; <a href="index.source.html" class="el_package">com.epam.gameoflife.world</a> &gt; <span class="el_source">MatCell.java</span></div><h1>MatCell.java</h1><pre class="source lang-java linenums">package com.epam.gameoflife.world;
+
+import com.epam.gameoflife.Cell;
+import com.epam.gameoflife.Grid;
+import com.epam.gameoflife.Point;
+
+import java.util.HashSet;
+import java.util.Objects;
+
+final class MatCell implements Cell {
+
+    //==== variables ====
+<span class="fc" id="L13">    int numberOfAliveNeighbors = 0;</span>
+    private boolean isAlive;
+<span class="fc" id="L15">    private boolean willLive = false;</span>
+<span class="fc" id="L16">    private final HashSet&lt;Point&gt; allMyNeighbors = new HashSet&lt;&gt;();</span>
+    private final int xPoint;
+    private final int yPoint;
+
+    //==== constructors ====
+<span class="fc" id="L21">    public MatCell(boolean isAlive, int yPoint, int xPoint) {</span>
+<span class="fc" id="L22">        this.isAlive = isAlive;</span>
+<span class="fc" id="L23">        this.yPoint = yPoint;</span>
+<span class="fc" id="L24">        this.xPoint = xPoint;</span>
+<span class="fc" id="L25">    }</span>
+
+    public MatCell(boolean isAlive, boolean willLive, int numberOfAliveNeighbors, int xPoint, int yPoint) {
+<span class="nc" id="L28">        this(isAlive, yPoint, xPoint);</span>
+<span class="nc" id="L29">        this.willLive = willLive;</span>
+<span class="nc" id="L30">        this.numberOfAliveNeighbors = numberOfAliveNeighbors;</span>
+<span class="nc" id="L31">    }</span>
+
+    //==== methods ====
+    @Override
+    public Cell getCellCopy() {
+<span class="nc" id="L36">        return new MatCell(this.isAlive, this.willLive, this.numberOfAliveNeighbors, this.xPoint, this.yPoint);</span>
+        //note that you still need to count alive neighbors
+    }
+
+    @Override
+    public boolean isAlive() {
+<span class="nc" id="L42">        return isAlive;</span>
+    }
+
+    public boolean WillLive() {
+<span class="nc" id="L46">        return willLive;</span>
+    }
+
+    public void setIsAlive(boolean alive) {
+<span class="nc" id="L50">        isAlive = alive;</span>
+<span class="nc" id="L51">    }</span>
+
+    @Override
+    public boolean willLive() {
+<span class="nc" id="L55">        return false;</span>
+    }
+
+    @Override
+    public int getYPoint() {
+<span class="nc" id="L60">        return this.yPoint;</span>
+    }
+
+    @Override
+    public int getXPoint() {
+<span class="nc" id="L65">        return this.xPoint;</span>
+    }
+
+    public void setWillLive(boolean willLive) {
+<span class="nc" id="L69">        this.willLive = willLive;</span>
+<span class="nc" id="L70">    }</span>
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (this == o) return true;</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (!( o instanceof MatCell that )) return false;</span>
+<span class="nc bnc" id="L76" title="All 6 branches missed.">        return xPoint == that.xPoint &amp;&amp; yPoint == that.yPoint &amp;&amp; allMyNeighbors.equals(that.allMyNeighbors);</span>
+    }
+
+    @Override
+    public HashSet&lt;Point&gt; countNeighbors(Grid mGrid) {
+<span class="nc" id="L81">        Matrix matrix = new Matrix(Grid.DEFAULT_HEIGHT, Grid.DEFAULT_WIDTH, mGrid);</span>
+<span class="nc" id="L82">        HashSet&lt;Point&gt; neighbors = this.allMyNeighbors;</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        for (int y = this.getYPoint() - 1; y &lt;= this.yPoint + 1; y++) {</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">            for (int x = this.getXPoint() - 1; x &lt;= this.getXPoint() + 1; x++) {</span>
+<span class="nc bnc" id="L85" title="All 12 branches missed.">                if (y &lt; 0 || y &gt;= matrix.getHeight() || x &lt; 0 || x &gt;= matrix.getWidth() || ( y == this.getYPoint() &amp;&amp; x == this.getXPoint() )) {</span>
+                } else {
+<span class="nc" id="L87">                    neighbors.add(new PointOnMatrix(y, x));</span>
+                }
+            }
+        }
+<span class="nc" id="L91">        return neighbors;</span>
+    }
+
+    @Override
+    public int countAliveNeighbors(Grid mGrid) {
+<span class="nc" id="L96">        int counter = 0;</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        for (Point neighbor : allMyNeighbors) {</span>
+<span class="nc" id="L98">            if (mGrid.getCellFromTheGrid(neighbor.getYPoint(),</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">                    neighbor.getXPoint()).isAlive()) {</span>
+<span class="nc" id="L100">                counter++;</span>
+            }
+<span class="nc" id="L102">        }</span>
+<span class="nc" id="L103">        this.numberOfAliveNeighbors = counter;</span>
+<span class="nc" id="L104">        return counter;</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L109">        return Objects.hash(allMyNeighbors, xPoint, yPoint);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

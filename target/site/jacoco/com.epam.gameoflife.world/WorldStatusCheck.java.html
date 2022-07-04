@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WorldStatusCheck.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">conwaysgameoflife</a> &gt; <a href="index.source.html" class="el_package">com.epam.gameoflife.world</a> &gt; <span class="el_source">WorldStatusCheck.java</span></div><h1>WorldStatusCheck.java</h1><pre class="source lang-java linenums">package com.epam.gameoflife.world;
+
+// TODO: 27/03/2022 can i make it private or package private?
+final public class WorldStatusCheck {
+
+    //==== variables ====
+    Matrix matrix;
+
+    //==== constructors ====
+<span class="nc" id="L10">    public WorldStatusCheck() {}</span>
+
+<span class="nc" id="L12">    public WorldStatusCheck(Matrix matrix) {</span>
+<span class="nc" id="L13">        this.matrix = matrix;</span>
+<span class="nc" id="L14">    }</span>
+
+    //==== methods ====
+    public boolean shouldTheWorldEnd() {
+<span class="nc bnc" id="L18" title="All 4 branches missed.">        return checkIfEveryonesDead() || checkIfItsStillLife();</span>
+
+    }
+
+    boolean checkIfEveryonesDead() {
+<span class="nc" id="L23">        int counter = 0;</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        for (int y = 0; y &lt; matrix.matHeight; y++) {</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">            for (int x = 0; x &lt; matrix.matWidth; x++) {</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">                if (matrix.matGrid[y][x].isAlive()) counter++;</span>
+            }
+        }
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        return ( counter == 0 );</span>
+    }
+
+    boolean checkIfItsStillLife() {
+<span class="nc" id="L33">        int counter = 0;</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        for (int y = 0; y &lt; matrix.matHeight; y++) {</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">            for (int x = 0; x &lt; matrix.matWidth; x++) {</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">                if (matrix.matGrid[y][x].WillLive() != matrix.matGrid[y][x].isAlive()) counter++;</span>
+            }
+        }
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        return ( counter == 0 );</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

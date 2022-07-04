@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameTemplate.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">conwaysgameoflife</a> &gt; <a href="index.source.html" class="el_package">com.epam.gameoflife.app</a> &gt; <span class="el_source">GameTemplate.java</span></div><h1>GameTemplate.java</h1><pre class="source lang-java linenums">package com.epam.gameoflife.app;
+
+import com.epam.gameoflife.gui.PrintCommander;
+import com.epam.gameoflife.gui.UserScanner;
+import com.epam.gameoflife.world.Matrix;
+import com.epam.gameoflife.world.WorldStatusCheck;
+
+import static java.lang.Thread.sleep;
+
+/**
+ * Game runtime class.
+ *
+ * @author Malgorzata Lasota
+ */
+public final class GameTemplate {
+
+    //==== variables ====
+    Matrix matrix;
+    Evolution evolution;
+    UserScanner userScanner;
+    PrintCommander printCommander;
+
+    //==== constructors ====
+<span class="nc" id="L24">    public GameTemplate() {</span>
+<span class="nc" id="L25">    }</span>
+
+<span class="nc" id="L27">    public GameTemplate(Matrix matrix) {</span>
+<span class="nc" id="L28">        this.matrix = matrix;</span>
+<span class="nc" id="L29">        this.evolution = new Evolution(matrix);</span>
+<span class="nc" id="L30">        this.userScanner = new UserScanner();</span>
+<span class="nc" id="L31">        this.printCommander = new PrintCommander(matrix);</span>
+<span class="nc" id="L32">    }</span>
+
+    //==== methods ====
+
+    /**
+     * Prepares the world.
+     *
+     * @author Malgorzata Lasota
+     */
+    public static int startTheGame() {
+<span class="nc" id="L42">        PrintCommander printCommander = new PrintCommander();</span>
+<span class="nc" id="L43">        UserScanner userScanner = new UserScanner();</span>
+<span class="nc" id="L44">        return printCommander.showGUI(userScanner);</span>
+    }
+
+    /**
+     * Starts the game.
+     *
+     * @author Malgorzata Lasota
+     */
+    public void playTheGame(Matrix matrix) {
+<span class="nc" id="L53">        printCommander.showFramedWorld(matrix);</span>
+<span class="nc" id="L54">        WorldStatusCheck wsc = new WorldStatusCheck(matrix);</span>
+
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        while (!wsc.shouldTheWorldEnd()) {</span>
+            try {
+<span class="nc" id="L58">                matrix = evolution.evolve(printCommander);</span>
+<span class="nc" id="L59">                printCommander.showFramedWorld(matrix);</span>
+<span class="nc" id="L60">                sleep(400);</span>
+<span class="nc" id="L61">            } catch (InterruptedException ignored) {</span>
+<span class="nc" id="L62">            }</span>
+        }
+        ;
+
+<span class="nc" id="L66">        evolution.endTheGame(printCommander);</span>
+
+<span class="nc" id="L68">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

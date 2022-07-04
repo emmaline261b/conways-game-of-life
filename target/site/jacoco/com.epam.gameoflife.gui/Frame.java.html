@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Frame.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">conwaysgameoflife</a> &gt; <a href="index.source.html" class="el_package">com.epam.gameoflife.gui</a> &gt; <span class="el_source">Frame.java</span></div><h1>Frame.java</h1><pre class="source lang-java linenums">package com.epam.gameoflife.gui;
+
+import com.epam.gameoflife.Grid;
+import com.epam.gameoflife.world.Matrix;
+
+ public final class Frame {
+
+    //==== variables ====
+<span class="fc" id="L9">    public static int frameNumber = 1;</span>
+<span class="fc" id="L10">    final int BUFFER = 4;</span>
+<span class="fc" id="L11">    char verticalBorder = ' ';</span>
+<span class="fc" id="L12">    char horizontalBorder = ' ';</span>
+<span class="fc" id="L13">    int frameWidth = Grid.DEFAULT_WIDTH;</span>
+<span class="fc" id="L14">    int frameHeight = Grid.DEFAULT_HEIGHT;</span>
+
+    //==== constructors ====
+<span class="fc" id="L17">    public Frame(Matrix matrix) {</span>
+<span class="fc" id="L18">        this.frameWidth += BUFFER;</span>
+<span class="fc" id="L19">    }</span>
+
+    //==== methods ====
+    private int countTheFrameHeight(Matrix matrix) {
+<span class="nc" id="L23">        return frameHeight = Grid.DEFAULT_HEIGHT + BUFFER;</span>
+    }
+
+    private int countTheFrameWidth(Matrix matrix) {
+<span class="nc" id="L27">        return frameWidth = Grid.DEFAULT_WIDTH + BUFFER;</span>
+    };
+
+    public static int getTheFrameNumber() {
+<span class="nc" id="L31">        return frameNumber;</span>
+    }
+
+    public static void addOneToFrameNumber() {
+<span class="nc" id="L35">        frameNumber++;</span>
+<span class="nc" id="L36">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

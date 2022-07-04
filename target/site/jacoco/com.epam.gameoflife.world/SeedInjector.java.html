@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SeedInjector.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">conwaysgameoflife</a> &gt; <a href="index.source.html" class="el_package">com.epam.gameoflife.world</a> &gt; <span class="el_source">SeedInjector.java</span></div><h1>SeedInjector.java</h1><pre class="source lang-java linenums">package com.epam.gameoflife.world;
+
+import com.epam.gameoflife.Cell;
+import com.epam.gameoflife.Grid;
+import com.epam.gameoflife.Point;
+
+public class SeedInjector {
+
+    //==== variables ====
+
+    //==== constructors ====
+<span class="fc" id="L12">    public SeedInjector() {}</span>
+
+    //==== methods ====
+    private Point getTheBeginningPoint(Grid mGrid, Grid sGrid) {
+<span class="fc" id="L16">        Point matMPoint = mGrid.getTheMidpoint();</span>
+<span class="fc" id="L17">        Point seedMPoint = sGrid.getTheMidpoint();</span>
+<span class="fc" id="L18">        return new PointOnMatrix(matMPoint.getYPoint() - seedMPoint.getYPoint(),</span>
+<span class="fc" id="L19">                matMPoint.getXPoint() - seedMPoint.getXPoint());</span>
+    }
+
+    void injectTheSeed(Grid mGrid, Grid sGrid) {
+<span class="fc" id="L23">        copyTheSeed(mGrid, sGrid);</span>
+<span class="fc" id="L24">    }</span>
+
+    private void copyTheSeed(Grid mGrid, Grid sGrid) {
+<span class="fc" id="L27">        Point matBPoint = getTheBeginningPoint(mGrid, sGrid);</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        for (int y = matBPoint.getYPoint(); y &lt; matBPoint.getYPoint() + sGrid.getHeight(); y++) {</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">            for (int x = matBPoint.getXPoint(); x &lt; matBPoint.getXPoint() + sGrid.getWidth(); x++) {</span>
+<span class="fc" id="L30">                Cell temp = (Cell)sGrid.getCellFromTheGrid(y - matBPoint.getYPoint(),</span>
+<span class="fc" id="L31">                        x - matBPoint.getXPoint());</span>
+<span class="fc" id="L32">                mGrid.setTheCellInTheGrid(temp.isAlive(), y, x);</span>
+            }
+        }
+<span class="fc" id="L35">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PrintCommander.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">conwaysgameoflife</a> &gt; <a href="index.source.html" class="el_package">com.epam.gameoflife.gui</a> &gt; <span class="el_source">PrintCommander.java</span></div><h1>PrintCommander.java</h1><pre class="source lang-java linenums">package com.epam.gameoflife.gui;
+
+import com.epam.gameoflife.Grid;
+import com.epam.gameoflife.tick.Seed;
+import com.epam.gameoflife.tick.Shapes;
+import com.epam.gameoflife.world.Matrix;
+
+public class PrintCommander {
+
+    //==== variables ====
+<span class="pc" id="L11">    public final char ALIVE_POINTER = '★';</span>
+    //۞
+    //༓  ❄
+    //፨ ⵘ ⠝
+    //៙ ◉ ● ◌ ⚫ ⚪ ⚽ ⭕
+    //᳀ ❌ ✖
+    //⃞ ⏹ ⏺ █ ░ ⬛ ⬜
+    //★ ☆ ⭐ ✹ ✴ ✳ ✨
+<span class="pc" id="L19">    public final char DEAD_POINTER = '☆';</span>
+    public Frame frame;
+
+    //==== constructors ====
+<span class="nc" id="L23">    public PrintCommander() {</span>
+<span class="nc" id="L24">    }</span>
+
+<span class="fc" id="L26">    public PrintCommander(Matrix matrix) {</span>
+<span class="fc" id="L27">        this.frame = new Frame(matrix);</span>
+<span class="fc" id="L28">    }</span>
+
+//    public static void main(String[] args) {
+//        Matrix matrix = new Matrix(5 ,5, new Seed(Shapes.BLINKER));
+//        PrintCommander pc = new PrintCommander(matrix);
+//        pc.showFramedWorld(matrix);
+//    }
+    //====== methods =======
+    public int showGUI(UserScanner userScanner) {
+<span class="nc" id="L37">        welcome();</span>
+<span class="nc" id="L38">        chooseYourBattle();</span>
+<span class="nc" id="L39">        int choice = userScanner.getUsersChoice();</span>
+<span class="nc" id="L40">        confirmTheChoice(choice);</span>
+<span class="nc" id="L41">        return choice;</span>
+    }
+
+    public void welcome() {
+<span class="nc" id="L45">        String welcome = &quot;&quot;&quot;</span>
+                 __       __   _______  _______        __       _______.        ___           _______      ___      .___  ___.  _______\s
+                |  |     |  | |   ____||   ____|      |  |     /       |       /   \\         /  _____|    /   \\     |   \\/   | |   ____|
+                |  |     |  | |  |__   |  |__         |  |    |   (----`      /  ^  \\       |  |  __     /  ^  \\    |  \\  /  | |  |__  \s
+                |  |     |  | |   __|  |   __|        |  |     \\   \\         /  /_\\  \\      |  | |_ |   /  /_\\  \\   |  |\\/|  | |   __| \s
+                |  `----.|  | |  |     |  |____       |  | .----)   |       /  _____  \\     |  |__| |  /  _____  \\  |  |  |  | |  |____\s
+                |_______||__| |__|     |_______|      |__| |_______/       /__/     \\__\\     \\______| /__/     \\__\\ |__|  |__| |_______|&quot;&quot;&quot;;
+
+<span class="nc" id="L53">        System.out.println(welcome);</span>
+<span class="nc" id="L54">        System.out.println();</span>
+<span class="nc" id="L55">    }</span>
+
+    public void chooseYourBattle() {
+<span class="nc" id="L58">        System.out.println(&quot;CHOOSE THE SHAPE YOU WANT TO START WITH:&quot;);</span>
+<span class="nc" id="L59">        System.out.println();</span>
+<span class="nc" id="L60">        printShapesByName();</span>
+<span class="nc" id="L61">        System.out.print(&quot;TYPE IN WHICH SHAPE YOU WANT TO START WITH? =&gt; &quot;);</span>
+<span class="nc" id="L62">    }</span>
+
+    private void printShapesByName() {
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        for (int i = 0; i &lt; Shapes.values().length; i++) {</span>
+<span class="nc" id="L66">            int ordinalPlusOne = Shapes.values()[i].ordinal() + 1;</span>
+<span class="nc" id="L67">            System.out.println(&quot; * &quot; + ordinalPlusOne + &quot;. * &quot; + Shapes.values()[i].name() + &quot; * &quot;);</span>
+        }
+<span class="nc" id="L69">        System.out.println();</span>
+<span class="nc" id="L70">    }</span>
+
+    public void showFramedWorld(Matrix matrix) {
+<span class="nc" id="L73">        printUpperBoundary();</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        for (int i = 0; i &lt; Grid.DEFAULT_HEIGHT; i++) {</span>
+<span class="nc" id="L75">            printLeft();</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">            if (matrix == null) {</span>
+<span class="nc" id="L77">                printVoid();</span>
+            } else {
+<span class="nc" id="L79">                printMatrixLine(i, matrix);</span>
+            }
+<span class="nc" id="L81">            printRight();</span>
+        }
+<span class="nc" id="L83">        PrintLowerBoundary();</span>
+        //System.out.println(&quot;TO BREAK CLICK =&gt; CTRL + 2.&quot;);
+
+<span class="nc" id="L86">    }</span>
+
+    private void PrintLowerBoundary() {
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        for (int i = 0; i &lt; frame.frameWidth; i++) {</span>
+<span class="nc" id="L90">            System.out.print(frame.horizontalBorder);</span>
+        }
+<span class="nc" id="L92">        System.out.println();</span>
+
+<span class="nc" id="L94">    }</span>
+
+    private void printRight() {
+<span class="nc" id="L97">        System.out.println(&quot; &quot; + frame.verticalBorder);</span>
+<span class="nc" id="L98">    }</span>
+
+    private void printVoid() {
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        for (int x = 0; x &lt; Grid.DEFAULT_WIDTH; x++) {</span>
+<span class="nc" id="L102">            System.out.print(&quot;.&quot;);</span>
+        }
+<span class="nc" id="L104">    }</span>
+
+    private void printMatrixLine(int y, Grid mGrid) {
+        try {
+<span class="nc bnc" id="L108" title="All 2 branches missed.">            for (int x = 0; x &lt; Grid.DEFAULT_WIDTH; x++) {</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">                if (mGrid.getCellFromTheGrid(y, x).isAlive()) {</span>
+<span class="nc" id="L110">                    System.out.print(ALIVE_POINTER);</span>
+                } else {
+<span class="nc" id="L112">                    System.out.print(DEAD_POINTER);</span>
+                }
+            }
+<span class="nc" id="L115">        } catch (IndexOutOfBoundsException ignored) {}</span>
+<span class="nc" id="L116">    }</span>
+
+    private void printLeft() {
+<span class="nc" id="L119">        System.out.print(frame.verticalBorder + &quot; &quot;);</span>
+<span class="nc" id="L120">    }</span>
+
+    private void printUpperBoundary() {
+<span class="nc bnc" id="L123" title="All 2 branches missed.">        for (int i = 0; i &lt; frame.frameWidth / 2 - 8; i++) {</span>
+<span class="nc" id="L124">            System.out.print(frame.horizontalBorder);</span>
+        }
+<span class="nc" id="L126">        System.out.print(&quot; ROUND NO. &quot; + Frame.frameNumber + &quot;  &quot;);</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">        for (int i = 0; i &lt; frame.frameWidth / 2 - 8; i++) {</span>
+<span class="nc" id="L128">            System.out.print(frame.horizontalBorder);</span>
+        }
+<span class="nc" id="L130">        System.out.println();</span>
+<span class="nc" id="L131">    }</span>
+
+    public void confirmTheChoice(int choice) {
+<span class="nc" id="L134">        System.out.println(&quot;YOU CHOSE OPTION NO. &quot; + choice + &quot; - &quot; + Shapes.values()[choice - 1].toString().toUpperCase() + &quot;.&quot;);</span>
+<span class="nc" id="L135">        System.out.println(&quot;THE GAME IS PREPARING...&quot;);</span>
+<span class="nc" id="L136">    }</span>
+
+    public void goodbye() {
+<span class="nc" id="L139">        String goodbye = &quot;&quot;&quot;</span>
+                  _______      ___      .___  ___.  _______         ______   ____    ____  _______ .______     \s
+                 /  _____|    /   \\     |   \\/   | |   ____|       /  __  \\  \\   \\  /   / |   ____||   _  \\    \s
+                |  |  __     /  ^  \\    |  \\  /  | |  |__         |  |  |  |  \\   \\/   /  |  |__   |  |_)  |   \s
+                |  | |_ |   /  /_\\  \\   |  |\\/|  | |   __|        |  |  |  |   \\      /   |   __|  |      /    \s
+                |  |__| |  /  _____  \\  |  |  |  | |  |____       |  `--'  |    \\    /    |  |____ |  |\\  \\----.
+                 \\______| /__/     \\__\\ |__|  |__| |_______|       \\______/      \\__/     |_______|| _| `._____|
+                                                                                                               \s&quot;&quot;&quot;;
+
+<span class="nc" id="L148">        System.out.println(goodbye);</span>
+<span class="nc" id="L149">        System.out.println();</span>
+
+<span class="nc" id="L151">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SeedCell.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">conwaysgameoflife</a> &gt; <a href="index.source.html" class="el_package">com.epam.gameoflife.tick</a> &gt; <span class="el_source">SeedCell.java</span></div><h1>SeedCell.java</h1><pre class="source lang-java linenums">package com.epam.gameoflife.tick;
+
+import com.epam.gameoflife.Cell;
+import com.epam.gameoflife.Grid;
+import com.epam.gameoflife.Point;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
+final class SeedCell implements Cell {
+
+    //==== variables ====
+<span class="pc" id="L13">    private boolean isAlive = false;</span>
+<span class="pc" id="L14">    private int yPoint = 0;</span>
+<span class="pc" id="L15">    private int xPoint = 0;</span>
+
+    //==== constructors ====
+<span class="nc" id="L18">    public SeedCell() {</span>
+<span class="nc" id="L19">    }</span>
+
+<span class="fc" id="L21">    public SeedCell(boolean isAlive, int yPoint, int xPoint) {</span>
+<span class="fc" id="L22">        this.isAlive = isAlive;</span>
+<span class="fc" id="L23">        this.yPoint = yPoint;</span>
+<span class="fc" id="L24">        this.xPoint = xPoint;</span>
+<span class="fc" id="L25">    }</span>
+
+    //==== methods ====
+    @Override
+    public SeedCell getCellCopy() {
+<span class="nc" id="L30">        return new SeedCell(this.isAlive, this.xPoint, this.yPoint);</span>
+    }
+
+    @Override
+    public boolean isAlive() {
+<span class="fc" id="L35">        return isAlive;</span>
+    }
+
+    @Override
+    public HashSet&lt;Point&gt; countNeighbors(Grid sGrid) {
+<span class="nc" id="L40">        HashSet&lt;Point&gt; neighbors = new HashSet&lt;&gt;();</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        for (int y = this.yPoint - 1; y &lt;= yPoint + 1; y++) {</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">            for (int x = this.xPoint - 1; x &lt;= xPoint + 1; x++) {</span>
+<span class="nc bnc" id="L43" title="All 10 branches missed.">                if (y &lt; 0 || y &gt; sGrid.getHeight() || x &lt; 0 || x &gt; sGrid.getWidth() || (y == x)) {</span>
+<span class="nc" id="L44">                    continue;</span>
+                } else {
+<span class="nc" id="L46">                    neighbors.add(new PointInSeed(y, x));</span>
+                }
+            }
+        }
+<span class="nc" id="L50">        return neighbors;</span>
+    }
+
+    @Override
+    public int countAliveNeighbors(Grid sGrid) {
+<span class="nc" id="L55">        int counter = 0;</span>
+<span class="nc" id="L56">        HashSet&lt;Point&gt; neighbors = countNeighbors(sGrid);</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        for (Point neighbor : neighbors) {</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">            for (int y = 0; y &lt; sGrid.getHeight(); y++) {</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">                for (int x = 0; x &lt; sGrid.getWidth(); x++) {</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">                    if (neighbor.getYPoint() == y</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">                            &amp;&amp; neighbor.getXPoint() == x</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">                            &amp;&amp; sGrid.getCellFromTheGrid(y, x).isAlive()) {</span>
+<span class="nc" id="L63">                        counter++;</span>
+                    }
+                }
+            }
+<span class="nc" id="L67">        }</span>
+<span class="nc" id="L68">        return counter;</span>
+    }
+
+    @Override
+<span class="nc" id="L72">    public void setWillLive(boolean b) {}</span>
+
+    @Override
+<span class="nc" id="L75">    public void setIsAlive(boolean b) {}</span>
+
+    @Override
+    public boolean willLive() {
+<span class="nc" id="L79">        return false;</span>
+    }
+
+    @Override
+    public int getYPoint() {
+<span class="nc" id="L84">        return this.yPoint;</span>
+    }
+
+    @Override
+    public int getXPoint() {
+<span class="nc" id="L89">        return this.xPoint;</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        if (this == o) return true;</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        if (!( o instanceof SeedCell )) return false;</span>
+<span class="nc" id="L96">        SeedCell seedCell = (SeedCell) o;</span>
+<span class="nc bnc" id="L97" title="All 6 branches missed.">        return isAlive == seedCell.isAlive &amp;&amp; xPoint == seedCell.xPoint &amp;&amp; yPoint == seedCell.yPoint;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

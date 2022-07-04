@@ -1,0 +1,16 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+conwaysgameoflife,com.epam.gameoflife.world,WorldStatusCheck,99,0,20,0,15,0,15,0,5,0
+conwaysgameoflife,com.epam.gameoflife.world,Matrix,138,118,8,4,24,27,11,9,7,7
+conwaysgameoflife,com.epam.gameoflife.world,MatCell,198,23,30,0,33,8,28,1,13,1
+conwaysgameoflife,com.epam.gameoflife.world,SeedInjector,0,75,0,4,0,14,0,6,0,4
+conwaysgameoflife,com.epam.gameoflife.world,PointOnMatrix,42,21,10,0,7,8,8,3,3,3
+conwaysgameoflife,com.epam.gameoflife.gui,PrintCommander,222,15,18,0,61,5,23,1,14,1
+conwaysgameoflife,com.epam.gameoflife.gui,Frame,17,27,0,0,5,9,4,2,4,2
+conwaysgameoflife,com.epam.gameoflife.gui,UserScanner,20,0,0,0,8,0,2,0,2,0
+conwaysgameoflife,com.epam.gameoflife.app,GameTemplate,71,0,2,0,21,0,5,0,4,0
+conwaysgameoflife,com.epam.gameoflife.app,Evolution,192,0,27,0,49,0,24,0,10,0
+conwaysgameoflife,com.epam.gameoflife.app,GameOfLife,22,0,0,0,5,0,2,0,2,0
+conwaysgameoflife,com.epam.gameoflife.tick,SeedCell,170,24,36,0,30,9,28,2,10,2
+conwaysgameoflife,com.epam.gameoflife.tick,Seed,62,89,5,5,9,16,7,8,4,6
+conwaysgameoflife,com.epam.gameoflife.tick,PointInSeed,42,21,10,0,7,8,8,3,3,3
+conwaysgameoflife,com.epam.gameoflife.tick,Shapes,118,2190,18,0,20,72,13,4,4,4
